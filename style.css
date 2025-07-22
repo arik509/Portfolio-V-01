@@ -7,9 +7,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body{
-    background: #1f242d;
-}
+
 
 a{
     color: #fff;
@@ -26,6 +24,17 @@ a{
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    visibility: hidden;
+    opacity: 0;
+    animation: show-content 1.5s linear forwards;
+    animation-delay: 1.2s;
+}
+
+@keyframes show-content{
+    100%{
+        visibility: visible;
+        opacity: 1;
+    }
 }
 
 .logo{
@@ -48,16 +57,23 @@ a{
     transition: 0.5s;
 }
 
-.navbar ul li a:hover{
+.navbar ul li a:hover,
+.navbar ul li.active a
+{
     color: #7cf03d;
 }
 
 .home{
     display: flex;
     align-items: center;
+    gap: 50px;
     height: 100vh;
     padding: 60px 9% 0;
     color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    animation: show-content 1.5s linear forwards;
+    animation-delay: 1.6s;
 }
 
 .home-info h1{
@@ -65,8 +81,23 @@ a{
 }
 
 .home-info h2{
+    display: inline-block;
     font-size: 32px;
     margin-top: -10px;
+}
+
+.home-info h2 span{
+    display: inline-block;
+    color:  transparent;
+    -webkit-text-stroke: .7px #7cf03d;
+    /* animation: display-text 16s linear infinite; */
+    animation-delay: calc(-4s * var(--i));
+}
+
+@keyframes display-text{
+    25%, 100%{
+        display: none;
+    }
 }
 
 .home-info p{
@@ -117,4 +148,70 @@ a{
     background-color: #7cf03d;
     color: #1f242d;
     box-shadow: 0 0 10px #7cf03d;
+}
+.home-img .img-box{
+    position: relative;
+    width: 32vw;
+    height: 32vw;
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.home-img .img-box::before,
+.home-img .img-box::after{
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: conic-gradient(transparent,transparent,transparent,#7cf03d);
+    
+}
+
+.home-img .img-box .img-item{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #1f242d;
+    border-radius: 50%;
+    border: .1px solid #1f242d;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.home-img .img-box .img-item img{
+    position: absolute;
+    top: 30px;
+    display: block;
+    width: 85%;
+    object-fit: cover;
+    mix-blend-mode: lighten;
+}
+
+.bars-animation{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: -1;
+}
+
+.bars-animation .bar{
+    width: 100%;
+    height: 100%;
+    background: #1f242d;
+    transform: translateY(-100%);
+    animation: show-bars .5s ease-in-out forwards;
+    animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes show-bars{
+    100%{
+        transform: translateY(0%);
+    }
 }
